@@ -1,17 +1,23 @@
 Completed:
-M01 Block 1
+M01 — Project Foundation
 
 Current database schema:
 None
 
-Current API endpoints:
-None
+Current API:
+GET /api/health
 
 Current environment variables:
-Not yet configured
+PORT
+FRONTEND_URL
+NODE_ENV
+VITE_API_BASE_URL
 
 Known issues:
 None
 
-Next:
-M01 Block 2 — Frontend Foundation
+Known limitations:
+M01 contains infrastructure only
+
+Next module:
+M02 — Database + Prisma
