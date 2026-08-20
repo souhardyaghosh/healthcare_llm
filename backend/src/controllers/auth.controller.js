@@ -1,4 +1,5 @@
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 const prisma = require('../config/prisma');
 const authConfig = require('../config/auth');
 const logger = require('../utils/logger');
@@ -93,6 +94,99 @@ const register = async (req, res, next) => {
   }
 };
 
+const login = async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+
+    // 1. Input Validation
+    if (!email || typeof email !== 'string' || email.trim() === '') {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Email address is required'
+        }
+      });
+    }
+
+    if (!password || typeof password !== 'string' || password === '') {
+      return res.status(400).json({
+        success: false,
+        error: {
+          code: 'VALIDATION_ERROR',
+          message: 'Password is required'
+        }
+      });
+    }
+
+    const normalizedEmail = email.trim().toLowerCase();
+
+    // 2. User Lookup
+    const user = await prisma.user.findUnique({
+      where: { email: normalizedEmail }
+    });
+
+    // 3. Generic Authentication Failure (Prevents Account Enumeration)
+    if (!user) {
+      logger.warn(`Login failed: User not found for ${normalizedEmail}`);
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'INVALID_CREDENTIALS',
+          message: 'Invalid email or password'
+        }
+      });
+    }
+
+    // 4. Verify Password with bcrypt
+    const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
+    if (!isPasswordValid) {
+      logger.warn(`Login failed: Invalid password attempt for user ${user.id} (${normalizedEmail})`);
+      return res.status(401).json({
+        success: false,
+        error: {
+          code: 'INVALID_CREDENTIALS',
+          message: 'Invalid email or password'
+        }
+      });
+    }
+
+    // 5. Generate JWT Token (claims: sub, email, role)
+    const token = jwt.sign(
+      {
+        sub: user.id,
+        email: user.email,
+        role: user.role
+      },
+      authConfig.jwtSecret,
+      { expiresIn: authConfig.jwtExpiresIn }
+    );
+
+    logger.info(`Successful login for user ${user.id} (${user.email}, role: ${user.role})`);
+
+    // 6. Return safe response payload
+    return res.status(200).json({
+      success: true,
+      message: 'Login successful',
+      data: {
+        token,
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          role: user.role,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt
+        }
+      }
+    });
+  } catch (err) {
+    logger.error(`Login error: ${err.message}`);
+    next(err);
+  }
+};
+
 module.exports = {
-  register
+  register,
+  login
 };

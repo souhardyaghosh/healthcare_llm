@@ -12,4 +12,9 @@
 - **Status**: PASS
 - **Summary**: Implemented `POST /api/auth/register` with input validation, bcrypt password hashing (10 rounds), PATIENT role enforcement, duplicate email 409 conflict handling, and password/passwordHash sanitization. Verified 7/7 test cases in `backend/tests/auth_registration.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 3 Checkpoint — Login + JWT
+- **Status**: PASS
+- **Summary**: Implemented `POST /api/auth/login` with bcrypt password verification, generic enumeration defense, JWT token creation (`sub`, `email`, `role` claims, 1d expiration), and multi-role support (`PATIENT`, `DOCTOR`, `ADMIN`). Verified 8/8 test cases in `backend/tests/auth_login.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+
 

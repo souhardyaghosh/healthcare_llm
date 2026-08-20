@@ -25,4 +25,13 @@
 - `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M03_CHANGELOG.md`
 
+## Block 3 — Login + JWT
+- `[ADDED]` `backend/tests/auth_login.test.js`
+- `[MODIFIED]` `backend/src/controllers/auth.controller.js`
+- `[MODIFIED]` `backend/src/routes/auth.routes.js`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
+
 

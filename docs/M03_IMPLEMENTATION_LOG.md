@@ -28,4 +28,16 @@
 - Created comprehensive test suite in `backend/tests/auth_registration.test.js`: verified all 7 test cases (valid registration, database persistence, bcrypt validation, duplicate email 409 rejection, role elevation defense, missing name 400 rejection, invalid email 400 rejection, short password 400 rejection).
 - Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 3 — Login + JWT
+- Implemented `POST /api/auth/login` endpoint in `backend/src/controllers/auth.controller.js` and declared `/login` in `backend/src/routes/auth.routes.js`.
+- Implemented input validation for `email` and `password`.
+- Implemented account enumeration defense: returns generic HTTP 401 Unauthorized (`INVALID_CREDENTIALS` / `"Invalid email or password"`) for both missing users and invalid password attempts.
+- Implemented secure password verification using `bcrypt.compare(password, user.passwordHash)`.
+- Implemented JWT token generation using `jsonwebtoken.sign()` with essential claims: `sub` (user id), `email`, and `role`. Configured token expiration (`1d`).
+- Verified multi-role authentication support: works seamlessly for `PATIENT`, `DOCTOR`, and `ADMIN` roles.
+- Secured API response payload: sanitized output to exclude `password` and `passwordHash`.
+- Created comprehensive test suite in `backend/tests/auth_login.test.js`: verified all 8 test cases (Patient login & JWT verification, Doctor login, Admin login, wrong password rejection, unknown email rejection, missing email rejection, missing password rejection, registration regression).
+- Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
+
+
 
