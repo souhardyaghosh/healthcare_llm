@@ -12,4 +12,9 @@
 - **Status**: PASS
 - **Summary**: Installed `prisma` v6.19.3 and `@prisma/client` v6.19.3 in `backend/`. Initialized `backend/prisma/schema.prisma` with `postgresql` datasource provider. Validated schema and generated Prisma Client. Verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 3 Checkpoint — Foundational Prisma Schema
+- **Status**: PASS
+- **Summary**: Implemented 13 foundational models (`User`, `DoctorProfile`, `WorkingHour`, `DoctorLeave`, `Appointment`, `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`, `Notification`, `CalendarConnection`, `CalendarEvent`, `AuditLog`) with correct relationships, enums, unique constraints, and indexes. Validated and generated Prisma Client v6.19.3 cleanly. Committed and pushed to `main`.
+
+
 

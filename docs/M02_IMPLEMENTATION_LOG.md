@@ -24,4 +24,15 @@
 - Executed `prisma generate`: successfully compiled Prisma Client v6.19.3 in `backend/node_modules/@prisma/client`.
 - Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`success: true`, `status: "ok"`).
 
+## Block 3 — Foundational Database Schema
+- Designed and authored 13 core models in `backend/prisma/schema.prisma`:
+  - `User`, `DoctorProfile`, `WorkingHour`, `DoctorLeave`, `Appointment`, `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`, `Notification`, `CalendarConnection`, `CalendarEvent`, `AuditLog`.
+- Established enums `Role` (PATIENT, DOCTOR, ADMIN) and `AppointmentStatus` (PENDING, CONFIRMED, COMPLETED, CANCELLED).
+- Enforced required unique constraints (`User.email`, `DoctorProfile.userId`, and 1-to-1 appointment relations for `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`).
+- Added targeted indexes on foreign keys, email, doctor lookup, appointment dates, notification read state, calendar connections/events, and audit logs.
+- Defined date/time persistence strategy using UTC-safe `DateTime` (`TIMESTAMP(3) WITH TIME ZONE`) and recurring `dayOfWeek`/`startTime`/`endTime` strings for working hours.
+- Documented sensitive OAuth token strategy in `CalendarConnection` (`accessTokenEncrypted`/`refreshTokenEncrypted`).
+- Executed `prisma format`, `prisma validate`, and `prisma generate`: verified schema validity and re-compiled Prisma Client.
+
+
 

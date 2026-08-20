@@ -24,4 +24,11 @@
 - `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M02_CHANGELOG.md`
 
+## Block 3 — Foundational Database Schema
+- `[MODIFIED]` `backend/prisma/schema.prisma`
+- `[MODIFIED]` `docs/M02_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M02_CHANGELOG.md`
+
+
 
