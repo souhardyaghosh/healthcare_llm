@@ -8,3 +8,8 @@
 - **Status**: PASS
 - **Summary**: Configured `healthcare_user` application role and schema `public` permissions on `healthcare_db`. Tested connection and table creation privileges. Configured `DATABASE_URL` in `backend/.env` (untracked) and template in `backend/.env.example`. Verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 2 Checkpoint — Prisma Installation + Initialization
+- **Status**: PASS
+- **Summary**: Installed `prisma` v6.19.3 and `@prisma/client` v6.19.3 in `backend/`. Initialized `backend/prisma/schema.prisma` with `postgresql` datasource provider. Validated schema and generated Prisma Client. Verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+

@@ -17,3 +17,11 @@
 - Verified Git security: confirmed `.env` files remain ignored and untracked.
 - Conducted regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`success: true`, `status: "ok"`).
 
+## Block 2 — Prisma Installation + Initialization
+- Installed `prisma` (`v6.19.3`) as a devDependency and `@prisma/client` (`v6.19.3`) as a dependency in `backend/`.
+- Initialized Prisma schema in `backend/prisma/schema.prisma` configured with `postgresql` datasource provider reading `env("DATABASE_URL")` and `prisma-client-js` generator.
+- Executed `prisma validate`: confirmed schema structure is valid.
+- Executed `prisma generate`: successfully compiled Prisma Client v6.19.3 in `backend/node_modules/@prisma/client`.
+- Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`success: true`, `status: "ok"`).
+
+
