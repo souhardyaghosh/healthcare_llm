@@ -59,17 +59,19 @@ model DoctorProfile {
 }
 
 model WorkingHour {
-  id        String   @id @default(uuid())
-  doctorId  String
-  dayOfWeek Int
-  startTime String
-  endTime   String
-  isActive  Boolean  @default(true)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                  String   @id @default(uuid())
+  doctorId            String
+  dayOfWeek           Int
+  startTime           String
+  endTime             String
+  slotDurationMinutes Int      @default(30)
+  isActive            Boolean  @default(true)
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
 
   doctor DoctorProfile @relation(fields: [doctorId], references: [id], onDelete: Cascade)
 
+  @@unique([doctorId, dayOfWeek])
   @@index([doctorId, dayOfWeek])
 }
 
