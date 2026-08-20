@@ -37,6 +37,14 @@
 - `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M02_CHANGELOG.md`
 
+## Block 5 — Prisma Client Integration
+- `[ADDED]` `backend/src/config/prisma.js`
+- `[MODIFIED]` `backend/src/controllers/health.controller.js`
+- `[MODIFIED]` `docs/M02_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M02_CHANGELOG.md`
+
+
 
 
 

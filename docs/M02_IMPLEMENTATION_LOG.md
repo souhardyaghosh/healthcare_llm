@@ -44,6 +44,14 @@
 - Executed `prisma migrate status`: confirmed `Database schema is up to date!`.
 - Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`success: true`, `status: "ok"`).
 
+## Block 5 — Prisma Client Integration
+- Created reusable Prisma Client singleton in `backend/src/config/prisma.js` configured with server-side event logging.
+- Integrated internal database ping (`SELECT 1`) into `backend/src/controllers/health.controller.js`.
+- Preserved existing health API JSON contract (`success: true`, `status: "ok"`, `service`, `module: "M02"`, `timestamp`) and appended `database: { connected: true }`.
+- Verified server-side error logging: logged database connection errors without leaking `DATABASE_URL` credentials or production stack traces.
+- Conducted end-to-end regression check: verified frontend loads at `http://localhost:5173`, communicates with backend at `http://localhost:5000/api/health`, and displays `Connected`.
+
+
 
 
 

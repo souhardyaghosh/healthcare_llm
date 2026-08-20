@@ -20,6 +20,11 @@
 - **Status**: PASS
 - **Summary**: Executed initial Prisma migration `init_healthcare_schema` against `healthcare_db`. Verified 14 PostgreSQL tables, primary keys, foreign keys, unique constraints (`User_email_key`), and indexes. Confirmed clean `prisma migrate status` (`Database schema is up to date!`) and verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 5 Checkpoint — Prisma Client Integration
+- **Status**: PASS
+- **Summary**: Created reusable Prisma Client module at `backend/src/config/prisma.js`. Integrated internal database ping into `GET /api/health` preserving original JSON contract with `database: { connected: true }`. Verified frontend to backend connection (`Connected`). Committed and pushed to `main`.
+
+
 
 
 
