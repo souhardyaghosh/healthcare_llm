@@ -61,6 +61,20 @@
   - TEST 3 (Duplicate Email Rejection): Verified attempting to create duplicate `email` throws `PrismaClientKnownRequestError` with code `P2002` targeting `email`.
 - Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 7 — Final Acceptance & Verification
+- Conducted comprehensive M02 database foundation acceptance check:
+  - Verified PostgreSQL 18.6 service running on `localhost:5432`.
+  - Confirmed database `healthcare_db` and application user `healthcare_user` with schema privileges and `CREATEDB` permission.
+  - Confirmed `DATABASE_URL` configured in `backend/.env` and git-ignored.
+  - Verified Prisma `v6.19.3` schema, migrations (`init_healthcare_schema`), and generated client.
+  - Verified 14 PostgreSQL tables (`User`, `DoctorProfile`, `WorkingHour`, `DoctorLeave`, `Appointment`, `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`, `Notification`, `CalendarConnection`, `CalendarEvent`, `AuditLog`, `_prisma_migrations`).
+  - Confirmed primary keys, foreign keys, unique constraints (`User_email_key`), and indexes.
+  - Verified development seed execution (`npx prisma db seed`) and CRUD verification script (`backend/tests/db_verification.test.js`).
+  - Conducted full M01 regression testing: verified Express backend, React/Vite frontend (`http://localhost:5173`), CORS, routing, and `/api/health` returning HTTP 200 OK (`database: { connected: true }`).
+- Updated `README.md` with PostgreSQL prerequisites, database configuration, Prisma migration, client generation, and seed commands.
+- Updated `PROJECT_STATE.md` marking M02 complete, documenting implemented schema models, active endpoints, environment variables, known limitations, and next module (`M03 — Authentication + RBAC`).
+
+
 
 
 

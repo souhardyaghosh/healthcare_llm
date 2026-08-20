@@ -52,6 +52,14 @@
 - `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M02_CHANGELOG.md`
 
+## Block 7 — Final Acceptance
+- `[MODIFIED]` `README.md`
+- `[MODIFIED]` `PROJECT_STATE.md`
+- `[MODIFIED]` `docs/M02_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M02_CHANGELOG.md`
+
+
 
 
 

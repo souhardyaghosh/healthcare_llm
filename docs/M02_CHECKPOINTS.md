@@ -28,6 +28,11 @@
 - **Status**: PASS
 - **Summary**: Implemented idempotent Prisma seed script `backend/prisma/seed.js` and executed `npx prisma db seed`. Ran controlled verification test suite (`backend/tests/db_verification.test.js`) confirming CRUD operations, User-DoctorProfile 1-to-1 relation, and P2002 duplicate email constraint rejection. Verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 7 Checkpoint — Final Acceptance
+- **Status**: PASS
+- **Summary**: Completed full M02 acceptance verification. Confirmed PostgreSQL 18.6 configuration, Prisma ORM v6.19.3, 14 database tables, 1-to-1 relations, unique email constraint, migration status clean, seed execution, CRUD verification, and backend/frontend M01 regression. Updated `README.md` and `PROJECT_STATE.md`. Committed and pushed to `main`.
+
+
 
 
 
