@@ -16,5 +16,10 @@
 - **Status**: PASS
 - **Summary**: Implemented `POST /api/auth/login` with bcrypt password verification, generic enumeration defense, JWT token creation (`sub`, `email`, `role` claims, 1d expiration), and multi-role support (`PATIENT`, `DOCTOR`, `ADMIN`). Verified 8/8 test cases in `backend/tests/auth_login.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 4 Checkpoint — Auth Middleware + Current User
+- **Status**: PASS
+- **Summary**: Implemented reusable JWT authentication middleware (`backend/src/middleware/auth.middleware.js`) with Bearer token parsing, signature/expiration validation, database persistence verification (`USER_NOT_FOUND`), and protected `GET /api/auth/me` endpoint. Verified 6/6 test cases in `backend/tests/auth_middleware.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+
 
 

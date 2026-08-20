@@ -33,5 +33,15 @@
 - `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M03_CHANGELOG.md`
 
+## Block 4 — Auth Middleware + Current User
+- `[ADDED]` `backend/src/middleware/auth.middleware.js`
+- `[ADDED]` `backend/tests/auth_middleware.test.js`
+- `[MODIFIED]` `backend/src/controllers/auth.controller.js`
+- `[MODIFIED]` `backend/src/routes/auth.routes.js`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
+
 
 

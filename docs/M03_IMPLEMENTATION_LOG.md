@@ -39,5 +39,16 @@
 - Created comprehensive test suite in `backend/tests/auth_login.test.js`: verified all 8 test cases (Patient login & JWT verification, Doctor login, Admin login, wrong password rejection, unknown email rejection, missing email rejection, missing password rejection, registration regression).
 - Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 4 — Auth Middleware + Current User
+- Implemented reusable JWT authentication middleware in `backend/src/middleware/auth.middleware.js`:
+  - Parses `Authorization: Bearer <JWT>` header.
+  - Rejects missing headers, malformed formats (non-Bearer), empty tokens, tampered signatures (`INVALID_TOKEN`), and expired tokens (`TOKEN_EXPIRED`).
+  - Verifies user exists in PostgreSQL database via Prisma (rejects tokens for deleted users with `USER_NOT_FOUND`).
+  - Attaches safe `req.user` context to request object.
+- Implemented current-user endpoint `GET /api/auth/me` in `backend/src/controllers/auth.controller.js` (`getMe`) and declared protected route in `backend/src/routes/auth.routes.js`.
+- Created comprehensive test suite in `backend/tests/auth_middleware.test.js`: verified all 6 test cases (valid Bearer token & `GET /api/auth/me`, missing Authorization header 401 rejection, malformed header 401 rejection, tampered signature 401 rejection, expired token 401 rejection, deleted user token 401 rejection).
+- Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
+
+
 
 
