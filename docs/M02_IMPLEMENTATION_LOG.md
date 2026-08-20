@@ -34,5 +34,16 @@
 - Documented sensitive OAuth token strategy in `CalendarConnection` (`accessTokenEncrypted`/`refreshTokenEncrypted`).
 - Executed `prisma format`, `prisma validate`, and `prisma generate`: verified schema validity and re-compiled Prisma Client.
 
+## Block 4 — Database Migration
+- Granted `CREATEDB` privilege to `healthcare_user` role in PostgreSQL to allow local dev shadow database creation.
+- Executed initial Prisma migration `init_healthcare_schema` (`prisma migrate dev --name init_healthcare_schema`).
+- Generated migration SQL artifact under `backend/prisma/migrations/*_init_healthcare_schema/migration.sql`.
+- Inspected PostgreSQL database `healthcare_db` tables, primary keys, foreign keys, unique indexes, and column types:
+  - Confirmed 14 total tables (`User`, `DoctorProfile`, `WorkingHour`, `DoctorLeave`, `Appointment`, `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`, `Notification`, `CalendarConnection`, `CalendarEvent`, `AuditLog`, `_prisma_migrations`).
+  - Confirmed 14 primary keys (`*_pkey`), 15 foreign keys, 34 total indexes including `User_email_key` unique index.
+- Executed `prisma migrate status`: confirmed `Database schema is up to date!`.
+- Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`success: true`, `status: "ok"`).
+
+
 
 

@@ -16,5 +16,10 @@
 - **Status**: PASS
 - **Summary**: Implemented 13 foundational models (`User`, `DoctorProfile`, `WorkingHour`, `DoctorLeave`, `Appointment`, `SymptomForm`, `PreVisitSummary`, `VisitNotes`, `PostVisitSummary`, `Notification`, `CalendarConnection`, `CalendarEvent`, `AuditLog`) with correct relationships, enums, unique constraints, and indexes. Validated and generated Prisma Client v6.19.3 cleanly. Committed and pushed to `main`.
 
+## Block 4 Checkpoint — Database Migration
+- **Status**: PASS
+- **Summary**: Executed initial Prisma migration `init_healthcare_schema` against `healthcare_db`. Verified 14 PostgreSQL tables, primary keys, foreign keys, unique constraints (`User_email_key`), and indexes. Confirmed clean `prisma migrate status` (`Database schema is up to date!`) and verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+
 
 

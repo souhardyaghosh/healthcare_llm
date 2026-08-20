@@ -30,5 +30,13 @@
 - `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M02_CHANGELOG.md`
 
+## Block 4 — Database Migration
+- `[ADDED]` `backend/prisma/migrations/*_init_healthcare_schema/migration.sql`
+- `[MODIFIED]` `docs/M02_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M02_ERROR_LOG.md`
+- `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M02_CHANGELOG.md`
+
+
 
 
