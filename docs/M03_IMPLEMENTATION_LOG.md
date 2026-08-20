@@ -18,3 +18,14 @@
 - Created centralized authentication configuration module at `backend/src/config/auth.js` exporting `jwtSecret`, `jwtExpiresIn`, and `bcryptSaltRounds` (10 rounds).
 - Conducted M01/M02 regression testing: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 2 — Password Hashing + Registration
+- Implemented `POST /api/auth/register` endpoint in `backend/src/controllers/auth.controller.js` and `backend/src/routes/auth.routes.js`, mounted under `/api/auth` in `backend/src/app.js`.
+- Implemented input validation for `name`, `email` (format check), and `password` (minimum 6 characters).
+- Implemented duplicate email check returning HTTP 409 Conflict (`EMAIL_EXISTS`).
+- Implemented secure password hashing using `bcrypt.hash(password, authConfig.bcryptSaltRounds)` before database persistence.
+- Enforced strict public registration role protection: client-supplied roles are ignored and public registrations strictly create `PATIENT` role users.
+- Secured API response: sanitized output to exclude `password` and `passwordHash`.
+- Created comprehensive test suite in `backend/tests/auth_registration.test.js`: verified all 7 test cases (valid registration, database persistence, bcrypt validation, duplicate email 409 rejection, role elevation defense, missing name 400 rejection, invalid email 400 rejection, short password 400 rejection).
+- Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
+
+

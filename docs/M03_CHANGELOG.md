@@ -16,3 +16,13 @@
 - `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M03_CHANGELOG.md`
 
+## Block 2 — Password Hashing + Registration
+- `[ADDED]` `backend/src/controllers/auth.controller.js`
+- `[ADDED]` `backend/src/routes/auth.routes.js`
+- `[ADDED]` `backend/tests/auth_registration.test.js`
+- `[MODIFIED]` `backend/src/app.js`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
+
