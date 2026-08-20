@@ -58,6 +58,23 @@
 - Created comprehensive test suite in `backend/tests/auth_rbac.test.js`: verified all 10 test cases (PATIENT/DOCTOR/ADMIN authentication, PATIENT blocked from admin 403, DOCTOR blocked from admin 403, ADMIN allowed on admin 200, PATIENT blocked from doctor/admin 403, DOCTOR allowed on doctor/admin 200, ADMIN allowed on doctor/admin 200, unauthenticated 401, invalid token 401, role escalation defense).
 - Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 6 — Full Authentication Integration Testing
+- Integrated frontend authentication testing component in `frontend/src/components/AuthTest.jsx` and updated `frontend/src/services/api.js` (`registerUser`, `loginUser`, `getCurrentUser`, `testRbacEndpoint`).
+- Mounted `<AuthTest />` on `frontend/src/pages/Home.jsx`.
+- Documented MVP token storage strategy: JWT tokens stored in browser `localStorage` for development session persistence (passwords never stored, tokens never logged).
+- Created comprehensive end-to-end backend & database integration test suite in `backend/tests/auth_integration.test.js`:
+  - Section 1: Patient registration & PostgreSQL database verification (bcrypt passwordHash verified, plaintext password absent, PATIENT role confirmed).
+  - Section 2: Patient login & `GET /api/auth/me` user context retrieval.
+  - Section 3: Doctor login & `GET /api/auth/me` DOCTOR role context retrieval.
+  - Section 4: Admin login & `GET /api/auth/me` ADMIN role context retrieval.
+  - Section 5: Negative security edge cases (wrong password 401, duplicate email 409, patient on admin route 403, doctor on admin route 403, admin on admin route 200).
+- Executed browser-based end-to-end integration test via automated subagent (`m03_auth_e2e_flow` recording):
+  - Patient registration via UI form -> PostgreSQL record created.
+  - Patient login via UI form -> JWT stored in `localStorage` -> User card rendered with `Role: PATIENT`.
+  - RBAC verification via UI buttons: "Check Admin Route" returned 403 Forbidden; "Check Patient/Admin Route" returned 200 OK.
+- Conducted M01/M02 regression check: `/api/health` HTTP 200 OK (`database: { connected: true }`) and full Vite/Express frontend-backend connection verified.
+
+
 
 
 

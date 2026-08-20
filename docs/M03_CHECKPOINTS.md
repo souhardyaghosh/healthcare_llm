@@ -24,6 +24,11 @@
 - **Status**: PASS
 - **Summary**: Implemented reusable RBAC authorization middleware (`backend/src/middleware/rbac.middleware.js`) with `authorize(...allowedRoles)` evaluating `PATIENT`, `DOCTOR`, and `ADMIN` access. Configured HTTP 401 Unauthorized and HTTP 403 Forbidden error handling. Verified 10/10 test cases in `backend/tests/auth_rbac.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 6 Checkpoint — Full Authentication Integration Testing
+- **Status**: PASS
+- **Summary**: Verified end-to-end integration across React frontend, Express backend, Prisma ORM, and PostgreSQL database. Added `frontend/src/components/AuthTest.jsx` UI test component. Verified 5/5 backend E2E integration test sections (`backend/tests/auth_integration.test.js`) and performed browser subagent UI testing (`m03_auth_e2e_flow` recording). Verified 401/403/409 negative security edge cases and confirmed M01/M02 regression. Committed and pushed to `main`.
+
+
 
 
 

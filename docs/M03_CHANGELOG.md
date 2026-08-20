@@ -50,6 +50,16 @@
 - `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M03_CHANGELOG.md`
 
+## Block 6 — Full Authentication Integration Testing
+- `[ADDED]` `frontend/src/components/AuthTest.jsx`
+- `[ADDED]` `backend/tests/auth_integration.test.js`
+- `[MODIFIED]` `frontend/src/services/api.js`
+- `[MODIFIED]` `frontend/src/pages/Home.jsx`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
+
 
 
 
