@@ -163,3 +163,38 @@ export async function updateDoctor(token, id, doctorData) {
   }
 }
 
+// Working Hours API Services
+export async function fetchDoctorWorkingHours(token, doctorId) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors/${doctorId}/working-hours`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+
+export async function updateDoctorWorkingHours(token, doctorId, workingHours) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors/${doctorId}/working-hours`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify({ workingHours })
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+
+

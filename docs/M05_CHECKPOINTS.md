@@ -12,4 +12,9 @@
 - **Status**: PASS
 - **Summary**: Built direct PostgreSQL integrity test suite `working_hours_db_verification.test.js`. Verified exact PostgreSQL row persistence, update value transitions (`10:00-13:00` -> `09:00-12:00`), multi-day deterministic ordering (`dayOfWeek ASC`), transactional rollback atomicity, `@@unique([doctorId, dayOfWeek])` DB constraint enforcement (P2002), and full M01-M04 regression. Committed and pushed to `main`.
 
+## Block 3 Checkpoint — Frontend Working Hours UI
+- **Status**: PASS
+- **Summary**: Built React component `WorkingHoursManagement.jsx` and page `WorkingHoursPage.jsx`. Added API helpers in `api.js` and mounted routes `/working-hours` and `/admin/working-hours`. Integrated Admin doctor selection, Doctor self-management, 7-day schedule configuration, start/end time validation, slot duration selector, and Patient access restriction notice. Refactored to ES modules (`import`/`export default`) and verified clean Vite build (`npm run build`). Performed browser E2E test confirming React rendering, Admin schedule save, reload persistence, Doctor view, and Patient access restriction. Committed and pushed to `main`.
+
+
 

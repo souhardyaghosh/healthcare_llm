@@ -29,13 +29,18 @@ Module M05 enables authorized users (`ADMIN` and `DOCTOR`) to configure a doctor
   - `getDoctorWorkingHours`: Resolves doctor profile (by DoctorProfile.id or User.id) and returns working hours sorted by `dayOfWeek ASC`.
   - `updateDoctorWorkingHours`: Performs atomic `prisma.$transaction` deletion and creation of doctor working hours. Enforces role & ownership authorization (`ADMIN` can edit any doctor; `DOCTOR` can edit only own schedule; `PATIENT` forbidden).
 - Created routes `backend/src/routes/workingHour.routes.js` and mounted at `/api/doctors/:doctorId/working-hours` in `app.js`.
-## Block 2 — Database + API Integrity
-- Created test suite `backend/tests/working_hours_db_verification.test.js` to verify end-to-end database persistence:
-  - Verified initial creation persists exact PostgreSQL table columns (`doctorId`, `dayOfWeek: 1`, `startTime: "10:00"`, `endTime: "13:00"`, `slotDurationMinutes: 30`, `isActive: true`).
-  - Verified update transition in PostgreSQL (`10:00-13:00` -> `09:00-12:00`).
-  - Verified multi-day persistence (Mon, Tue, Wed) and deterministic ordering (`dayOfWeek ASC`: `[1, 2, 3]`).
-  - Verified invalid transaction rollback in PostgreSQL (failed batch with invalid `15:00-12:00` Friday rejected; Thursday not committed; previous schedule preserved).
-  - Verified database schema constraint `@@unique([doctorId, dayOfWeek])` (P2002 duplicate error triggered on raw duplicate insert).
-  - Verified full system regression (M01 Health, M02 Database, M03 Auth/RBAC, M04 Doctor Management).
+## Block 3 — Working Hours Frontend UI
+- Added frontend API helpers `fetchDoctorWorkingHours(token, doctorId)` and `updateDoctorWorkingHours(token, doctorId, workingHours)` in `frontend/src/services/api.js`.
+- Created React component `frontend/src/components/WorkingHoursManagement.jsx`:
+  - Supports `ADMIN` doctor dropdown selection (`GET /api/doctors`) and `DOCTOR` self-schedule auto-resolution.
+  - Renders all 7 weekly days (Monday–Sunday) with active/inactive checkbox toggles, start time (`HH:mm`), end time (`HH:mm`), and slot duration dropdown (15, 30, 45, 60 min).
+  - Client-side validation: verifies `startTime < endTime` for active working days before dispatching API request.
+  - Implements loading state (`wh-loading-state`), success alert (`wh-success-alert`), error alert (`wh-error-alert`), and role access restriction notice (`access-restricted-notice` for `PATIENT`).
+  - Uses ES module syntax (`import`/`export default`).
+- Created page `frontend/src/pages/WorkingHoursPage.jsx` and mounted routes `/working-hours` and `/admin/working-hours` in `frontend/src/App.jsx`.
+- Added navigation links and "Schedule" button in `Home.jsx` and `DoctorManagement.jsx`.
+- Verified Vite build: `npm run build` compiled clean (`dist/assets/index-*.js` 199.43 kB).
+- Executed browser E2E test via `browser_subagent`: Verified React mounting, Admin doctor selection, schedule configuration, API update (`PUT` HTTP 200), reload persistence, Doctor self-management view (`Role: DOCTOR`), and Patient access restriction notice.
+
 
 

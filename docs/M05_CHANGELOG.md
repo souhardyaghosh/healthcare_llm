@@ -24,4 +24,17 @@
 - `[MODIFIED]` `docs/M05_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M05_CHANGELOG.md`
 
+## Block 3 — Working Hours Frontend UI
+- `[MODIFIED]` `frontend/src/services/api.js`
+- `[ADDED]` `frontend/src/components/WorkingHoursManagement.jsx`
+- `[ADDED]` `frontend/src/pages/WorkingHoursPage.jsx`
+- `[MODIFIED]` `frontend/src/App.jsx`
+- `[MODIFIED]` `frontend/src/pages/Home.jsx`
+- `[MODIFIED]` `frontend/src/components/DoctorManagement.jsx`
+- `[MODIFIED]` `docs/M05_ERROR_LOG.md`
+- `[MODIFIED]` `docs/M05_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M05_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M05_CHANGELOG.md`
+
+
 

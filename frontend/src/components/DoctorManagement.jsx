@@ -208,10 +208,17 @@ export default function DoctorManagement({ token: propToken, userRole: propRole 
                   </button>
                   <button
                     onClick={() => openEditModal(doc)}
-                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#ffc107', color: '#212529', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.85rem' }}
+                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#ffc107', color: '#212529', border: 'none', borderRadius: '4px', cursor: 'pointer', marginRight: '0.4rem', fontSize: '0.85rem' }}
                   >
                     Edit
                   </button>
+                  <a
+                    href="/working-hours"
+                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#3182ce', color: '#fff', textDecoration: 'none', borderRadius: '4px', fontSize: '0.85rem', fontWeight: 'bold' }}
+                  >
+                    Schedule
+                  </a>
+
                 </td>
               </tr>
             ))}
