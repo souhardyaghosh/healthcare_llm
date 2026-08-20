@@ -25,4 +25,14 @@ This document logs all implementation details, architecture decisions, database 
 - Mounted `/api/doctors` in `backend/src/app.js`.
 - Created comprehensive backend test suite in `backend/tests/doctor_management.test.js`: verified all 9 test cases (creation, atomic DB verification, duplicate email 409, doctor listing, doctor retrieval by ID, doctor update, 404 handling, PATIENT/DOCTOR 403 blocking, 401 unauthenticated check, passwordHash omission, M01/M03 regression).
 
+## Block 2 — API Contract + Database Verification
+- Expanded `backend/tests/doctor_management.test.js` to execute comprehensive contract and transaction safety verification:
+  - Section 1: Prisma transaction rollback safety verified (deliberate transaction failure safely rolled back `User` creation in PostgreSQL with zero orphaned records).
+  - Section 2: Validation matrix verified (missing name, missing email, invalid email, missing specialization all returned HTTP 400 `VALIDATION_ERROR`).
+  - Section 3: Authorization matrix verified (ADMIN allowed 201/200; DOCTOR blocked 403; PATIENT blocked 403; Unauthenticated blocked 401).
+  - Section 4: Duplicate email handling on create and update both verified (returned HTTP 409 `EMAIL_EXISTS`).
+  - Section 5: Sensitive credential protection verified (response payloads confirmed completely free of `password`, `passwordHash`, `JWT`, and `DATABASE_URL`).
+  - Section 6: M03 authentication regression verified (`GET /api/auth/me` context operates cleanly).
+
+
 

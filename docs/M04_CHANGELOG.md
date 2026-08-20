@@ -16,3 +16,10 @@
 - `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M04_CHANGELOG.md`
 
+## Block 2 — API Contract + Database Verification
+- `[MODIFIED]` `backend/tests/doctor_management.test.js`
+- `[MODIFIED]` `docs/M04_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M04_CHANGELOG.md`
+
+

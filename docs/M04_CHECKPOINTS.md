@@ -8,3 +8,8 @@
 - **Status**: PASS
 - **Summary**: Created backend doctor management API (`POST /api/doctors`, `GET /api/doctors`, `GET /api/doctors/:id`, `PUT /api/doctors/:id`) protected by `authenticate` + `authorize('ADMIN')`. Implemented atomic Prisma transactions linking `User` (`role: DOCTOR`) and `DoctorProfile`, bcrypt password hashing, duplicate email handling (409 Conflict), response sanitization, and input validation. Verified 9/9 backend API test cases (`backend/tests/doctor_management.test.js`) and confirmed M01/M03 regression. Committed and pushed to `main`.
 
+## Block 2 Checkpoint — API Contract + Database Verification
+- **Status**: PASS
+- **Summary**: Expanded test suite in `backend/tests/doctor_management.test.js` verifying transaction rollback safety (zero orphaned PostgreSQL records), complete validation matrix (HTTP 400), strict authorization matrix (ADMIN 201/200, DOCTOR 403, PATIENT 403, Unauth 401), duplicate email handling on create/update (HTTP 409), sensitive credential payload protection, and M03 authentication regression. All 6/6 contract sections passed cleanly. Committed and pushed to `main`.
+
+
