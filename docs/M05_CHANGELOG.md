@@ -18,3 +18,10 @@
 - `[MODIFIED]` `docs/M05_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M05_CHANGELOG.md`
 
+## Block 2 — Database + API Integrity
+- `[ADDED]` `backend/tests/working_hours_db_verification.test.js`
+- `[MODIFIED]` `docs/M05_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M05_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M05_CHANGELOG.md`
+
+

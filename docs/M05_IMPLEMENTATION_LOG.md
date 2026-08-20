@@ -29,5 +29,13 @@ Module M05 enables authorized users (`ADMIN` and `DOCTOR`) to configure a doctor
   - `getDoctorWorkingHours`: Resolves doctor profile (by DoctorProfile.id or User.id) and returns working hours sorted by `dayOfWeek ASC`.
   - `updateDoctorWorkingHours`: Performs atomic `prisma.$transaction` deletion and creation of doctor working hours. Enforces role & ownership authorization (`ADMIN` can edit any doctor; `DOCTOR` can edit only own schedule; `PATIENT` forbidden).
 - Created routes `backend/src/routes/workingHour.routes.js` and mounted at `/api/doctors/:doctorId/working-hours` in `app.js`.
-- Created automated test suite `backend/tests/working_hours.test.js`: Verified all 8/8 sections (Admin save/retrieval, Doctor self-management, Cross-Doctor 403 blocking, Patient 403 blocking, Unauth 401 blocking, full Validation matrix, Transaction safety rollback, and M01-M04 regression).
+## Block 2 — Database + API Integrity
+- Created test suite `backend/tests/working_hours_db_verification.test.js` to verify end-to-end database persistence:
+  - Verified initial creation persists exact PostgreSQL table columns (`doctorId`, `dayOfWeek: 1`, `startTime: "10:00"`, `endTime: "13:00"`, `slotDurationMinutes: 30`, `isActive: true`).
+  - Verified update transition in PostgreSQL (`10:00-13:00` -> `09:00-12:00`).
+  - Verified multi-day persistence (Mon, Tue, Wed) and deterministic ordering (`dayOfWeek ASC`: `[1, 2, 3]`).
+  - Verified invalid transaction rollback in PostgreSQL (failed batch with invalid `15:00-12:00` Friday rejected; Thursday not committed; previous schedule preserved).
+  - Verified database schema constraint `@@unique([doctorId, dayOfWeek])` (P2002 duplicate error triggered on raw duplicate insert).
+  - Verified full system regression (M01 Health, M02 Database, M03 Auth/RBAC, M04 Doctor Management).
+
 

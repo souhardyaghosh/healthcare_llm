@@ -8,3 +8,8 @@
 - **Status**: PASS
 - **Summary**: Enhanced `WorkingHour` model in `schema.prisma` with `slotDurationMinutes` and `@@unique([doctorId, dayOfWeek])` constraint, executed migration `add_slot_duration_to_working_hour`. Implemented request validation (`workingHour.validation.js`), transactional controller (`workingHour.controller.js`), and routes (`workingHour.routes.js`) mounted at `/api/doctors/:doctorId/working-hours`. Built test suite `working_hours.test.js` verifying 8/8 test sections (Admin save/retrieval, Doctor self-management, Cross-Doctor 403 blocking, Patient 403 blocking, Unauth 401 blocking, full Validation matrix, Transaction safety rollback, and M01-M04 regression). Committed and pushed to `main`.
 
+## Block 2 Checkpoint — Database + API Integrity
+- **Status**: PASS
+- **Summary**: Built direct PostgreSQL integrity test suite `working_hours_db_verification.test.js`. Verified exact PostgreSQL row persistence, update value transitions (`10:00-13:00` -> `09:00-12:00`), multi-day deterministic ordering (`dayOfWeek ASC`), transactional rollback atomicity, `@@unique([doctorId, dayOfWeek])` DB constraint enforcement (P2002), and full M01-M04 regression. Committed and pushed to `main`.
+
+
