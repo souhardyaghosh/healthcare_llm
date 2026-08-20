@@ -95,3 +95,71 @@ export async function testRbacEndpoint(token, endpointPath) {
     return { ok: false, status: 0, error: err.message };
   }
 }
+
+// Doctor Management API Services
+export async function fetchDoctors(token) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+
+export async function fetchDoctorById(token, id) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors/${id}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      }
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+
+export async function createDoctor(token, doctorData) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(doctorData)
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+
+export async function updateDoctor(token, id, doctorData) {
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/doctors/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`
+      },
+      body: JSON.stringify(doctorData)
+    });
+    const data = await res.json();
+    return { ok: res.ok, status: res.status, data };
+  } catch (err) {
+    return { ok: false, status: 0, error: err.message };
+  }
+}
+

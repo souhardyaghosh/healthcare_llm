@@ -22,4 +22,17 @@
 - `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M04_CHANGELOG.md`
 
+## Block 3 — Admin Doctor Management UI
+- `[ADDED]` `frontend/src/components/DoctorManagement.jsx`
+- `[ADDED]` `frontend/src/pages/AdminDoctorsPage.jsx`
+- `[MODIFIED]` `frontend/src/services/api.js`
+- `[MODIFIED]` `frontend/src/App.jsx`
+- `[MODIFIED]` `frontend/src/pages/Home.jsx`
+- `[MODIFIED]` `frontend/src/components/AuthTest.jsx`
+- `[MODIFIED]` `backend/prisma/seed.js`
+- `[MODIFIED]` `docs/M04_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M04_CHANGELOG.md`
+
+
 

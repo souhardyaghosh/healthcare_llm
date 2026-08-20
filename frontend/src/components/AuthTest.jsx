@@ -53,10 +53,12 @@ export default function AuthTest() {
     const res = await loginUser(email, password);
     if (res.ok && res.data.success) {
       const newToken = res.data.data.token;
+      const user = res.data.data.user;
       localStorage.setItem('token', newToken);
+      localStorage.setItem('userRole', user.role);
       setToken(newToken);
-      setCurrentUser(res.data.data.user);
-      setMessage(`Login successful! Logged in as ${res.data.data.user.email} (Role: ${res.data.data.user.role})`);
+      setCurrentUser(user);
+      setMessage(`Login successful! Logged in as ${user.email} (Role: ${user.role})`);
       setPassword('');
     } else {
       setError(res.data?.error?.message || 'Login failed');
@@ -65,12 +67,14 @@ export default function AuthTest() {
 
   const handleLogout = () => {
     localStorage.removeItem('token');
+    localStorage.removeItem('userRole');
     setToken('');
     setCurrentUser(null);
     setMessage('Logged out successfully.');
     setError(null);
     setRbacResult(null);
   };
+
 
   const handleRbacCheck = async (endpoint) => {
     setRbacResult(null);
@@ -207,35 +211,65 @@ export default function AuthTest() {
               </button>
             </form>
           ) : (
-            <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: '400px' }}>
-              <div>
-                <label>Email Address:</label>
-                <input
-                  id="login-email"
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder="e.g. patient@example.com"
-                  required
-                  style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-                />
+            <div>
+              <div style={{ marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#e9ecef', borderRadius: '4px' }}>
+                <p style={{ margin: '0 0 0.5rem 0', fontSize: '0.85rem', fontWeight: 'bold' }}>Quick Fill Demo Credentials:</p>
+                <div style={{ display: 'flex', gap: '0.5rem', flexWrap: 'wrap' }}>
+                  <button
+                    type="button"
+                    onClick={() => { setEmail('admin@system.com'); setPassword('AdminSecret123!'); }}
+                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#007bff', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
+                  >
+                    Admin (admin@system.com)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setEmail('dr.smith@example.com'); setPassword('DoctorSecret123!'); }}
+                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#17a2b8', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
+                  >
+                    Doctor (dr.smith@example.com)
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setEmail('patient.jane@example.com'); setPassword('PatientSecret123!'); }}
+                    style={{ padding: '0.3rem 0.6rem', backgroundColor: '#28a745', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer', fontSize: '0.8rem' }}
+                  >
+                    Patient (patient.jane@example.com)
+                  </button>
+                </div>
               </div>
-              <div>
-                <label>Password:</label>
-                <input
-                  id="login-password"
-                  type="password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                  style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
-                />
-              </div>
-              <button id="btn-submit-login" type="submit" style={{ padding: '0.6rem', backgroundColor: '#1976d2', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
-                Sign In
-              </button>
-            </form>
+
+              <form onSubmit={handleLogin} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', maxWidth: '400px' }}>
+                <div>
+                  <label>Email Address:</label>
+                  <input
+                    id="login-email"
+                    type="email"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="e.g. patient@example.com"
+                    required
+                    style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+                  />
+                </div>
+                <div>
+                  <label>Password:</label>
+                  <input
+                    id="login-password"
+                    type="password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    required
+                    style={{ width: '100%', padding: '0.5rem', marginTop: '0.25rem' }}
+                  />
+                </div>
+                <button id="btn-submit-login" type="submit" style={{ padding: '0.6rem', backgroundColor: '#1976d2', color: '#fff', border: 'none', borderRadius: '4px', cursor: 'pointer' }}>
+                  Sign In
+                </button>
+              </form>
+            </div>
           )}
+
         </div>
       )}
     </div>

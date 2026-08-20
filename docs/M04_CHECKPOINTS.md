@@ -12,4 +12,9 @@
 - **Status**: PASS
 - **Summary**: Expanded test suite in `backend/tests/doctor_management.test.js` verifying transaction rollback safety (zero orphaned PostgreSQL records), complete validation matrix (HTTP 400), strict authorization matrix (ADMIN 201/200, DOCTOR 403, PATIENT 403, Unauth 401), duplicate email handling on create/update (HTTP 409), sensitive credential payload protection, and M03 authentication regression. All 6/6 contract sections passed cleanly. Committed and pushed to `main`.
 
+## Block 3 Checkpoint — Admin Doctor Management UI
+- **Status**: PASS
+- **Summary**: Created clean React UI component `<DoctorManagement />` (`frontend/src/components/DoctorManagement.jsx`) with doctor listing, create modal, edit modal, view modal, status banners, loading indicators, duplicate email handling, and non-admin role restriction notice. Extended `frontend/src/services/api.js` with doctor API calls. Declared `/admin/doctors` route in `App.jsx` and updated `Home.jsx`. Seeded PostgreSQL with dev Admin (`admin@system.com` / `AdminSecret123!`), Doctor (`dr.smith@example.com`), and Patient (`patient.jane@example.com`) accounts with bcrypt hashes. Added quick fill credential buttons to `AuthTest.jsx`. Verified full workflow via end-to-end browser subagent testing. Committed and pushed to `main`.
+
+
 

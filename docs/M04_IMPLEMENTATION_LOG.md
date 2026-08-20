@@ -34,5 +34,20 @@ This document logs all implementation details, architecture decisions, database 
   - Section 5: Sensitive credential protection verified (response payloads confirmed completely free of `password`, `passwordHash`, `JWT`, and `DATABASE_URL`).
   - Section 6: M03 authentication regression verified (`GET /api/auth/me` context operates cleanly).
 
+## Block 3 — Admin Doctor Management UI
+- Extended `frontend/src/services/api.js` with doctor management service functions (`fetchDoctors`, `fetchDoctorById`, `createDoctor`, `updateDoctor`).
+- Built `<DoctorManagement />` component (`frontend/src/components/DoctorManagement.jsx`):
+  - Frontend role guard displaying an access restriction notice when logged-in user is not `ADMIN`.
+  - Doctor list table showing Name, Email, Specialization badge, Bio summary, and Action buttons (View, Edit).
+  - Create Doctor Modal form (Full Name, Email, Specialization, Bio, Initial Password) with error banners and duplicate email handling (HTTP 409).
+  - Edit Doctor Modal form allowing seamless update of Name, Email, Specialization, and Bio.
+  - View Doctor Modal displaying safe doctor details with zero credential leakage.
+- Created `AdminDoctorsPage.jsx` (`frontend/src/pages/AdminDoctorsPage.jsx`) and declared `/admin/doctors` route in `App.jsx`.
+- Updated `Home.jsx` with direct navigation link to `/admin/doctors` and embedded `<DoctorManagement />`.
+- Updated `backend/prisma/seed.js` to seed standard dev Admin (`admin@system.com` / `AdminSecret123!`), Doctor (`dr.smith@example.com`), and Patient (`patient.jane@example.com`) accounts with real bcrypt password hashes.
+- Updated `AuthTest.jsx` with quick-fill demo credential buttons for instant Admin/Doctor/Patient login.
+- Performed E2E browser verification via `browser_subagent`: Admin login, doctor listing, doctor creation, view modal, edit update, logout, and non-admin role access restriction all passed cleanly.
+
+
 
 
