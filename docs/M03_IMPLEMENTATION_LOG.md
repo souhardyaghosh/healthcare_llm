@@ -49,6 +49,16 @@
 - Created comprehensive test suite in `backend/tests/auth_middleware.test.js`: verified all 6 test cases (valid Bearer token & `GET /api/auth/me`, missing Authorization header 401 rejection, malformed header 401 rejection, tampered signature 401 rejection, expired token 401 rejection, deleted user token 401 rejection).
 - Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
 
+## Block 5 — Role-Based Access Control
+- Implemented reusable Role-Based Access Control (RBAC) middleware in `backend/src/middleware/rbac.middleware.js`:
+  - `authorize(...allowedRoles)` middleware evaluates authenticated user (`req.user.role`) against target route requirements (`PATIENT`, `DOCTOR`, `ADMIN`).
+  - Returns HTTP 401 Unauthorized (`UNAUTHORIZED`) if unauthenticated request is received.
+  - Returns HTTP 403 Forbidden (`FORBIDDEN`) if user authenticated but lacks required role permissions.
+- Added minimal RBAC verification test endpoints to `backend/src/routes/auth.routes.js` (`/test/admin`, `/test/doctor-or-admin`, `/test/patient-or-admin`).
+- Created comprehensive test suite in `backend/tests/auth_rbac.test.js`: verified all 10 test cases (PATIENT/DOCTOR/ADMIN authentication, PATIENT blocked from admin 403, DOCTOR blocked from admin 403, ADMIN allowed on admin 200, PATIENT blocked from doctor/admin 403, DOCTOR allowed on doctor/admin 200, ADMIN allowed on doctor/admin 200, unauthenticated 401, invalid token 401, role escalation defense).
+- Conducted M01/M02 regression check: backend server starts cleanly on port 5000 and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
+
+
 
 
 

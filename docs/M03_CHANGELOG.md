@@ -42,6 +42,15 @@
 - `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M03_CHANGELOG.md`
 
+## Block 5 — Role-Based Access Control
+- `[ADDED]` `backend/src/middleware/rbac.middleware.js`
+- `[ADDED]` `backend/tests/auth_rbac.test.js`
+- `[MODIFIED]` `backend/src/routes/auth.routes.js`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
+
 
 
 

@@ -20,6 +20,11 @@
 - **Status**: PASS
 - **Summary**: Implemented reusable JWT authentication middleware (`backend/src/middleware/auth.middleware.js`) with Bearer token parsing, signature/expiration validation, database persistence verification (`USER_NOT_FOUND`), and protected `GET /api/auth/me` endpoint. Verified 6/6 test cases in `backend/tests/auth_middleware.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
 
+## Block 5 Checkpoint — Role-Based Access Control
+- **Status**: PASS
+- **Summary**: Implemented reusable RBAC authorization middleware (`backend/src/middleware/rbac.middleware.js`) with `authorize(...allowedRoles)` evaluating `PATIENT`, `DOCTOR`, and `ADMIN` access. Configured HTTP 401 Unauthorized and HTTP 403 Forbidden error handling. Verified 10/10 test cases in `backend/tests/auth_rbac.test.js` and confirmed backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+
 
 
 
