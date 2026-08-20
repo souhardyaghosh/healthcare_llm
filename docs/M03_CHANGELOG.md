@@ -1,0 +1,18 @@
+# M03 Changelog — Authentication + RBAC
+
+## Block 0 — Inspection + Preparation
+- `[ADDED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[ADDED]` `docs/M03_ERROR_LOG.md`
+- `[ADDED]` `docs/M03_CHECKPOINTS.md`
+- `[ADDED]` `docs/M03_CHANGELOG.md`
+
+## Block 1 — Authentication Dependencies + Configuration
+- `[ADDED]` `backend/src/config/auth.js`
+- `[MODIFIED]` `backend/package.json`
+- `[MODIFIED]` `backend/src/config/env.js`
+- `[MODIFIED]` `backend/.env.example`
+- `[MODIFIED]` `.env.example`
+- `[MODIFIED]` `docs/M03_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M03_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M03_CHANGELOG.md`
+
