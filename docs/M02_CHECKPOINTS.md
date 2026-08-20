@@ -24,6 +24,11 @@
 - **Status**: PASS
 - **Summary**: Created reusable Prisma Client module at `backend/src/config/prisma.js`. Integrated internal database ping into `GET /api/health` preserving original JSON contract with `database: { connected: true }`. Verified frontend to backend connection (`Connected`). Committed and pushed to `main`.
 
+## Block 6 Checkpoint — Seed + Database Verification
+- **Status**: PASS
+- **Summary**: Implemented idempotent Prisma seed script `backend/prisma/seed.js` and executed `npx prisma db seed`. Ran controlled verification test suite (`backend/tests/db_verification.test.js`) confirming CRUD operations, User-DoctorProfile 1-to-1 relation, and P2002 duplicate email constraint rejection. Verified backend `/api/health` HTTP 200 regression. Committed and pushed to `main`.
+
+
 
 
 

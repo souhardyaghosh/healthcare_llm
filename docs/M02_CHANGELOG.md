@@ -44,6 +44,15 @@
 - `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M02_CHANGELOG.md`
 
+## Block 6 — Seed + Database Verification
+- `[ADDED]` `backend/prisma/seed.js`
+- `[ADDED]` `backend/tests/db_verification.test.js`
+- `[MODIFIED]` `backend/package.json`
+- `[MODIFIED]` `docs/M02_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M02_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M02_CHANGELOG.md`
+
+
 
 
 

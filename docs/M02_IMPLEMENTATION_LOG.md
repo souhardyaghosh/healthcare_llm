@@ -51,6 +51,17 @@
 - Verified server-side error logging: logged database connection errors without leaking `DATABASE_URL` credentials or production stack traces.
 - Conducted end-to-end regression check: verified frontend loads at `http://localhost:5173`, communicates with backend at `http://localhost:5000/api/health`, and displays `Connected`.
 
+## Block 6 — Seed + CRUD Verification
+- Authored development seed script in `backend/prisma/seed.js` using Prisma `upsert` for idempotent seeding of fictional `Doctor` (`Dr. John Smith`, `dr.smith@example.com`, Cardiology) and `Patient` (`Jane Doe`, `patient.jane@example.com`) records.
+- Configured `"prisma": { "seed": "node prisma/seed.js" }` in `backend/package.json`.
+- Executed `npx prisma db seed`: verified seed script creates Doctor and Patient records cleanly without duplicates.
+- Created controlled database verification test suite `backend/tests/db_verification.test.js`:
+  - TEST 1 (Create User + DoctorProfile): Verified 1-to-1 relationship creation and foreign key alignment (`userId === user.id`).
+  - TEST 2 (Read Relational Data): Verified query with `include: { doctorProfile: true }` returns accurate nested relation.
+  - TEST 3 (Duplicate Email Rejection): Verified attempting to create duplicate `email` throws `PrismaClientKnownRequestError` with code `P2002` targeting `email`.
+- Conducted backend regression check: verified backend server startup and `GET /api/health` returns HTTP 200 OK (`database: { connected: true }`).
+
+
 
 
 
