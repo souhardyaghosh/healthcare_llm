@@ -3,23 +3,26 @@
 ## Project Overview
 The Healthcare Appointment & Follow-up Manager is an integrated system designed for patient appointments, doctor availability management, automated follow-up tracking, and scheduling logic.
 
-## Current Module: M04 — Admin Doctor Management
-This repository contains the complete foundation, authentication, and admin doctor management setup (Modules M01, M02, M03 & M04) establishing:
-- Clean React + Vite frontend with React Router, Auth UI component (`AuthTest.jsx`), and Admin Doctor Management portal (`DoctorManagement.jsx`, `/admin/doctors`)
-- Modular Node.js + Express backend with environment configuration, structured logging, JWT authentication middleware, and doctor management routes
+## Current Module: M05 — Working Hours + Slot Configuration
+This repository contains the complete foundation, authentication, admin doctor management, and working hours setup (Modules M01, M02, M03, M04 & M05) establishing:
+- Clean React + Vite frontend with React Router, Auth UI component (`AuthTest.jsx`), Admin Doctor Management portal (`DoctorManagement.jsx`), and Working Hours Management portal (`WorkingHoursManagement.jsx`, `/working-hours`)
+- Modular Node.js + Express backend with environment configuration, structured logging, JWT authentication middleware, doctor management routes, and working hours routes
 - PostgreSQL database (`healthcare_db`) with application user (`healthcare_user`)
-- Prisma ORM (`v6.19.3`) integration with 13 foundational database models
-- Automated Prisma database migrations (`init_healthcare_schema`)
+- Prisma ORM (`v6.19.3`) integration with 13 foundational database models including enhanced `WorkingHour` (`slotDurationMinutes`, `@@unique([doctorId, dayOfWeek])`)
+- Automated Prisma database migrations (`init_healthcare_schema`, `m05_working_hours_slot_duration`)
 - Idempotent development seeding script (`npx prisma db seed`) with pre-seeded Admin, Doctor, and Patient dev accounts
 - Secure patient registration (`POST /api/auth/register`) with bcrypt password hashing (10 salt rounds) and strict `PATIENT` role assignment
 - Secure login (`POST /api/auth/login`) with generic enumeration defense and JWT generation (`1d` expiration)
 - Reusable JWT authentication middleware (`backend/src/middleware/auth.middleware.js`) and current user context endpoint (`GET /api/auth/me`)
 - Reusable Role-Based Access Control (RBAC) authorization middleware (`backend/src/middleware/rbac.middleware.js`) supporting `PATIENT`, `DOCTOR`, and `ADMIN` role protection
 - Atomic Doctor Management endpoints (`POST /api/doctors`, `GET /api/doctors`, `GET /api/doctors/:id`, `PUT /api/doctors/:id`) backed by Prisma `$transaction` guarantee
-- Strict input validation middleware (`doctor.validation.js`) and duplicate email protection (HTTP 409 `EMAIL_EXISTS`)
+- Atomic Working Hours endpoints (`GET /api/doctors/:doctorId/working-hours`, `PUT /api/doctors/:doctorId/working-hours`) backed by Prisma `$transaction` deletion & creation guarantee
+- Strict input validation middleware (`workingHour.validation.js`) enforcing `dayOfWeek` (0-6), time format (`HH:mm`), sequence (`startTime < endTime`), and slot duration (15, 30, 45, 60 min)
+- Strict role and ownership authorization matrix (`ADMIN` can manage any doctor's hours; `DOCTOR` can manage own hours; `PATIENT` access forbidden)
 - Sensitive credential protection (zero leakage of `password`, `passwordHash`, or `JWT` in response payloads)
-- Comprehensive automated test suites (`doctor_management.test.js`, `m04_e2e_workflow.test.js`, `auth_*.test.js`)
+- Comprehensive automated test suites (`working_hours.test.js`, `working_hours_db_verification.test.js`, `doctor_management.test.js`, `auth_*.test.js`)
 - Complete project documentation logs in `docs/`
+
 
 
 ## Architecture

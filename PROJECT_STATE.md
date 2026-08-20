@@ -3,11 +3,12 @@ Completed:
 - M02 — Database + Prisma
 - M03 — Authentication + RBAC
 - M04 — Admin Doctor Management
+- M05 — Working Hours + Slot Configuration
 
 Current database schema:
 - User (Central identity model; id, name, email @unique, passwordHash, role enum: PATIENT, DOCTOR, ADMIN)
 - DoctorProfile (1-to-1 relation with User; specialization, bio)
-- WorkingHour (doctor relation, dayOfWeek 0-6, startTime, endTime, isActive)
+- WorkingHour (doctor relation, dayOfWeek 0-6, startTime, endTime, slotDurationMinutes, isActive, @@unique([doctorId, dayOfWeek]))
 - DoctorLeave (doctor relation, startDate, endDate, reason)
 - Appointment (patient/doctor relations, appointmentDate, status enum)
 - SymptomForm (patient/appointment relations, symptoms, severity, notes)
@@ -28,6 +29,8 @@ Current API Endpoints:
 - GET /api/doctors
 - GET /api/doctors/:id
 - PUT /api/doctors/:id
+- GET /api/doctors/:doctorId/working-hours
+- PUT /api/doctors/:doctorId/working-hours
 
 Current environment variables:
 - PORT
@@ -45,4 +48,5 @@ Known limitations:
 - Authentication tokens stored in browser localStorage for client MVP development architecture; session storage can be further hardened in future production stages.
 
 Next module:
-- M05 — Working Hours + Slot Configuration
+- M06 — Doctor Leave Management
+
