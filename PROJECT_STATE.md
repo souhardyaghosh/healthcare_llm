@@ -2,6 +2,7 @@ Completed:
 - M01 — Project Foundation
 - M02 — Database + Prisma
 - M03 — Authentication + RBAC
+- M04 — Admin Doctor Management
 
 Current database schema:
 - User (Central identity model; id, name, email @unique, passwordHash, role enum: PATIENT, DOCTOR, ADMIN)
@@ -23,6 +24,10 @@ Current API Endpoints:
 - POST /api/auth/register
 - POST /api/auth/login
 - GET /api/auth/me
+- POST /api/doctors
+- GET /api/doctors
+- GET /api/doctors/:id
+- PUT /api/doctors/:id
 
 Current environment variables:
 - PORT
@@ -40,4 +45,4 @@ Known limitations:
 - Authentication tokens stored in browser localStorage for client MVP development architecture; session storage can be further hardened in future production stages.
 
 Next module:
-- M04 — Admin Doctor Management
+- M05 — Working Hours + Slot Configuration

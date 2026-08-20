@@ -3,20 +3,24 @@
 ## Project Overview
 The Healthcare Appointment & Follow-up Manager is an integrated system designed for patient appointments, doctor availability management, automated follow-up tracking, and scheduling logic.
 
-## Current Module: M03 — Authentication + RBAC
-This repository contains the complete foundation and authentication setup (Modules M01, M02 & M03) establishing:
-- Clean React + Vite frontend with React Router and Auth UI component (`frontend/src/components/AuthTest.jsx`)
-- Modular Node.js + Express backend with environment configuration, structured logging, and JWT authentication middleware
+## Current Module: M04 — Admin Doctor Management
+This repository contains the complete foundation, authentication, and admin doctor management setup (Modules M01, M02, M03 & M04) establishing:
+- Clean React + Vite frontend with React Router, Auth UI component (`AuthTest.jsx`), and Admin Doctor Management portal (`DoctorManagement.jsx`, `/admin/doctors`)
+- Modular Node.js + Express backend with environment configuration, structured logging, JWT authentication middleware, and doctor management routes
 - PostgreSQL database (`healthcare_db`) with application user (`healthcare_user`)
 - Prisma ORM (`v6.19.3`) integration with 13 foundational database models
 - Automated Prisma database migrations (`init_healthcare_schema`)
-- Idempotent development seeding script (`npx prisma db seed`)
+- Idempotent development seeding script (`npx prisma db seed`) with pre-seeded Admin, Doctor, and Patient dev accounts
 - Secure patient registration (`POST /api/auth/register`) with bcrypt password hashing (10 salt rounds) and strict `PATIENT` role assignment
 - Secure login (`POST /api/auth/login`) with generic enumeration defense and JWT generation (`1d` expiration)
 - Reusable JWT authentication middleware (`backend/src/middleware/auth.middleware.js`) and current user context endpoint (`GET /api/auth/me`)
-- Reusable Role-Based Access Control (RBAC) authorization middleware (`backend/src/middleware/rbac.middleware.js`) supporting `PATIENT`, `DOCTOR`, and `ADMIN` role protection with HTTP 401 Unauthorized and HTTP 403 Forbidden handling
-- Automated test suites (`auth_registration.test.js`, `auth_login.test.js`, `auth_middleware.test.js`, `auth_rbac.test.js`, `auth_integration.test.js`)
+- Reusable Role-Based Access Control (RBAC) authorization middleware (`backend/src/middleware/rbac.middleware.js`) supporting `PATIENT`, `DOCTOR`, and `ADMIN` role protection
+- Atomic Doctor Management endpoints (`POST /api/doctors`, `GET /api/doctors`, `GET /api/doctors/:id`, `PUT /api/doctors/:id`) backed by Prisma `$transaction` guarantee
+- Strict input validation middleware (`doctor.validation.js`) and duplicate email protection (HTTP 409 `EMAIL_EXISTS`)
+- Sensitive credential protection (zero leakage of `password`, `passwordHash`, or `JWT` in response payloads)
+- Comprehensive automated test suites (`doctor_management.test.js`, `m04_e2e_workflow.test.js`, `auth_*.test.js`)
 - Complete project documentation logs in `docs/`
+
 
 ## Architecture
 - **Frontend**: React (v18), Vite, JavaScript, React Router (v6)
@@ -58,10 +62,27 @@ JWT_EXPIRES_IN=1d
   - **Header**: `Authorization: Bearer <JWT>`
   - **Response (200 OK)**: Returns authenticated user identity (id, name, email, role).
 
-### 3. Role-Based Access Control (RBAC Test Endpoints)
+### 3. Doctor Management (Admin Only)
+- **`POST /api/doctors`**: Admin creates doctor account and profile atomically (`User` + `DoctorProfile`).
+  - **Header**: `Authorization: Bearer <ADMIN_JWT>`
+  - **Body**: `{ "name": "Dr. Sarah Connor", "email": "sarah@example.com", "specialization": "Neurology", "bio": "Neurologist." }`
+  - **Response (201 Created)**: Returns created user & profile record without sensitive password fields.
+- **`GET /api/doctors`**: Admin lists all doctors with profiles.
+  - **Header**: `Authorization: Bearer <ADMIN_JWT>`
+  - **Response (200 OK)**: Returns list of doctor user objects with embedded `doctorProfile`.
+- **`GET /api/doctors/:id`**: Admin fetches single doctor record by ID.
+  - **Header**: `Authorization: Bearer <ADMIN_JWT>`
+  - **Response (200 OK)**: Returns doctor user object with `doctorProfile`.
+- **`PUT /api/doctors/:id`**: Admin updates doctor name, email, specialization, and bio.
+  - **Header**: `Authorization: Bearer <ADMIN_JWT>`
+  - **Body**: `{ "name": "Dr. Sarah Connor MD", "specialization": "Pediatric Neurology" }`
+  - **Response (200 OK)**: Returns updated doctor record.
+
+### 4. Role-Based Access Control (RBAC Test Endpoints)
 - **`GET /api/auth/test/admin`**: Requires `ADMIN` role (403 Forbidden for `PATIENT`/`DOCTOR`).
 - **`GET /api/auth/test/doctor-or-admin`**: Requires `DOCTOR` or `ADMIN` role.
 - **`GET /api/auth/test/patient-or-admin`**: Requires `PATIENT` or `ADMIN` role.
+
 
 ## Project Structure
 ```text
