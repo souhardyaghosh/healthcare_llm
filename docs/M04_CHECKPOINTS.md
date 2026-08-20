@@ -16,5 +16,10 @@
 - **Status**: PASS
 - **Summary**: Created clean React UI component `<DoctorManagement />` (`frontend/src/components/DoctorManagement.jsx`) with doctor listing, create modal, edit modal, view modal, status banners, loading indicators, duplicate email handling, and non-admin role restriction notice. Extended `frontend/src/services/api.js` with doctor API calls. Declared `/admin/doctors` route in `App.jsx` and updated `Home.jsx`. Seeded PostgreSQL with dev Admin (`admin@system.com` / `AdminSecret123!`), Doctor (`dr.smith@example.com`), and Patient (`patient.jane@example.com`) accounts with bcrypt hashes. Added quick fill credential buttons to `AuthTest.jsx`. Verified full workflow via end-to-end browser subagent testing. Committed and pushed to `main`.
 
+## Block 4 Checkpoint — End-to-End Doctor Workflow
+- **Status**: PASS
+- **Summary**: Built and executed automated E2E test suite in `backend/tests/m04_e2e_workflow.test.js`. Verified 10/10 test sections: Flow A (Create doctor & DB persistence), Flow B (View doctor matching DB), Flow C (Edit doctor & DB update), Flow D (Duplicate email HTTP 409 `EMAIL_EXISTS`), Flow E (Patient attack blocked HTTP 403), Flow F (Doctor attack blocked HTTP 403), Flow G (No token blocked HTTP 401), Flow H (Invalid token blocked HTTP 401), Database Consistency (0 orphaned records), and System Regression (M01 Health, M02 DB, M03 Auth/RBAC). Committed and pushed to `main`.
+
+
 
 

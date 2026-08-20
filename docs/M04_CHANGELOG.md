@@ -34,5 +34,12 @@
 - `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
 - `[MODIFIED]` `docs/M04_CHANGELOG.md`
 
+## Block 4 — End-to-End Doctor Workflow
+- `[ADDED]` `backend/tests/m04_e2e_workflow.test.js`
+- `[MODIFIED]` `docs/M04_IMPLEMENTATION_LOG.md`
+- `[MODIFIED]` `docs/M04_CHECKPOINTS.md`
+- `[MODIFIED]` `docs/M04_CHANGELOG.md`
+
+
 
 

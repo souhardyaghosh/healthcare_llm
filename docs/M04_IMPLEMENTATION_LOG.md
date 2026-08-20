@@ -48,6 +48,20 @@ This document logs all implementation details, architecture decisions, database 
 - Updated `AuthTest.jsx` with quick-fill demo credential buttons for instant Admin/Doctor/Patient login.
 - Performed E2E browser verification via `browser_subagent`: Admin login, doctor listing, doctor creation, view modal, edit update, logout, and non-admin role access restriction all passed cleanly.
 
+## Block 4 — End-to-End Doctor Workflow
+- Created comprehensive automated E2E workflow test suite in `backend/tests/m04_e2e_workflow.test.js`:
+  - Flow A (Create): Admin created doctor account, verified User (`role = DOCTOR`) and `DoctorProfile` persistence in PostgreSQL.
+  - Flow B (View): Retrieved doctor details matching PostgreSQL database values.
+  - Flow C (Edit): Admin updated doctor name, email, specialization, and bio; verified DB values updated.
+  - Flow D (Duplicate Email): Duplicate doctor email creation attempt rejected with HTTP 409 `EMAIL_EXISTS`.
+  - Flow E (Patient Attack): Patient role attempt to POST/PUT doctors blocked with HTTP 403 `FORBIDDEN`.
+  - Flow F (Doctor Attack): Doctor role attempt to POST/PUT doctors blocked with HTTP 403 `FORBIDDEN`.
+  - Flow G (No Token): Unauthenticated request blocked with HTTP 401 `UNAUTHORIZED`.
+  - Flow H (Invalid Token): Tampered JWT token blocked with HTTP 401 `UNAUTHORIZED`.
+  - Database Consistency: Verified 0 orphaned `DoctorProfile` records and 0 `DOCTOR` users missing profile.
+  - Regression: Verified M01 `/api/health`, M02 database connection, and M03 auth/RBAC operate cleanly without regression.
+
+
 
 
 
